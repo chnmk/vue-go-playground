@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "github.com/chnmk/vue-go-playground/transport_grpc";
+
+package transport_grpc;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string message = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+
+// protoc -I main/transport/grpc proto/grpc_service.proto --go_out=./main/transport/grpc --go_opt=paths=source_relative --go-grpc_out=./main/transport/grpc --go-grpc_opt=paths=source_relative

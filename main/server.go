@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"runtime"
 
+	// transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/server"
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
-
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -18,7 +18,7 @@ func main() {
 
 	// Run handlers
 	http.HandleFunc("/api/hello", transport.ButtonHandler)
-	http.HandleFunc("/api/upload", transport.UploadHandler)
+	// http.HandleFunc("/api/upload", transport.UploadHandler)
 
 	// Serve frontend app
 	fs := http.FileServer(http.Dir("./frontend/dist"))
@@ -36,6 +36,9 @@ func main() {
 			http.Serve(ln, nil),
 		)
 	}()
+
+	// grpc server
+	// go transport_grpc.Serve()
 
 	// Keep server goroutine alive until exit
 	runtime.Goexit()
