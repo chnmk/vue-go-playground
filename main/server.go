@@ -9,7 +9,7 @@ import (
 
 	// transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/server"
 
-	producer "github.com/chnmk/vue-go-playground/main/kafka"
+	transport_grqphql "github.com/chnmk/vue-go-playground/main/transport/graphql"
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -22,7 +22,13 @@ func main() {
 	// go redis_client.ExampleClient()
 
 	// Connect to Kafka
-	go producer.Produce()
+	// go producer.Produce()
+
+	// GraphQL
+	go transport_grqphql.HelloFromGraphQL()
+
+	// grpc server
+	// go transport_grpc.Serve()
 
 	// Run handlers
 	http.HandleFunc("/api/hello", transport.ButtonHandler)
@@ -44,9 +50,6 @@ func main() {
 			http.Serve(ln, nil),
 		)
 	}()
-
-	// grpc server
-	// go transport_grpc.Serve()
 
 	// Keep server goroutine alive until exit
 	runtime.Goexit()
