@@ -8,7 +8,8 @@ import (
 	"runtime"
 
 	// transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/server"
-	redis_client "github.com/chnmk/vue-go-playground/main/db/redis"
+
+	producer "github.com/chnmk/vue-go-playground/main/kafka"
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -18,7 +19,10 @@ func main() {
 	// reader.ReadSQLite()
 
 	// Connect to Redis
-	go redis_client.ExampleClient()
+	// go redis_client.ExampleClient()
+
+	// Connect to Kafka
+	go producer.Produce()
 
 	// Run handlers
 	http.HandleFunc("/api/hello", transport.ButtonHandler)
