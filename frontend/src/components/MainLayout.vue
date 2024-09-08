@@ -5,13 +5,15 @@
     </h1>
     <HelloButton />
     <!--
-      <DataDisplay />
+      <HelloGraphQL />
     -->
   </div>
 </template>
 
 <script setup lang="ts">
 import HelloButton from './HelloButton.vue'
+// @ts-ignore
+import HelloGraphQL from './HelloGraphQL.vue';
 // import DataDisplay from './DataDisplay.vue'
 </script>
 
