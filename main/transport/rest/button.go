@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/client"
 )
 
 type vueMessage struct {
@@ -23,5 +21,5 @@ func ButtonHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Printf("Got the following message: %s\n", decoded.Message)
-	transport_grpc.Greet()
+	// transport_grpc.Greet()
 }

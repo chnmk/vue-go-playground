@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	// transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/server"
+	redis_client "github.com/chnmk/vue-go-playground/main/db/redis"
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -15,6 +16,9 @@ import (
 func main() {
 	// Read SQL
 	// reader.ReadSQLite()
+
+	// Connect to Redis
+	go redis_client.ExampleClient()
 
 	// Run handlers
 	http.HandleFunc("/api/hello", transport.ButtonHandler)
