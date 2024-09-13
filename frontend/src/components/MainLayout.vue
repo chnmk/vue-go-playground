@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <h1 class="message">
-      Hello, Vue!
+      vue-go-playground
     </h1>
-    <HelloButton />
+    <DataReader />
     <!--
       <HelloGraphQL />
     -->
@@ -11,10 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import HelloButton from './HelloButton.vue'
+import DataReader from './DataReader.vue'
 // @ts-ignore
-import HelloGraphQL from './HelloGraphQL.vue';
-// import DataDisplay from './DataDisplay.vue'
+// import HelloGraphQL from './HelloGraphQL.vue';
 </script>
 
 <style scoped>
