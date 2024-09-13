@@ -10,7 +10,7 @@ type vueMessage struct {
 	Message string `json:"message"`
 }
 
-func ButtonHandler(w http.ResponseWriter, r *http.Request) {
+func RestHandler(w http.ResponseWriter, r *http.Request) {
 	var decoded vueMessage
 
 	err := json.NewDecoder(r.Body).Decode(&decoded)
@@ -20,6 +20,6 @@ func ButtonHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("Got the following message: %s\n", decoded.Message)
-	// transport_grpc.Greet()
+	fmt.Printf("Got the following message through REST: %s\n", decoded.Message)
+	w.Write([]byte("REST API request success"))
 }

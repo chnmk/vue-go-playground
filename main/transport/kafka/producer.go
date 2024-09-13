@@ -19,9 +19,9 @@ func Produce() {
 
 	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
 	_, err = conn.WriteMessages(
-		kafka.Message{Value: []byte("one!")},
-		kafka.Message{Value: []byte("two!")},
-		kafka.Message{Value: []byte("three!")},
+		kafka.Message{Value: []byte("Hello from vue-go-playground through Kafka! No. 1")},
+		kafka.Message{Value: []byte("Hello from vue-go-playground through Kafka! No. 2")},
+		kafka.Message{Value: []byte("Hello from vue-go-playground through Kafka! No. 3")},
 	)
 	if err != nil {
 		log.Fatal("failed to write messages:", err)
