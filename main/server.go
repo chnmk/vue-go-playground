@@ -7,28 +7,10 @@ import (
 	"net/http"
 	"runtime"
 
-	// transport_grpc "github.com/chnmk/vue-go-playground/main/transport/grpc/server"
-
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	// Read SQL
-	// reader.ReadSQLite()
-
-	// Connect to Redis
-	// go redis_client.ExampleClient()
-
-	// Connect to Kafka
-	// go producer.Produce()
-
-	// GraphQL
-	// go transport_grqphql.HelloFromGraphQL()
-
-	// grpc server
-	// go transport_grpc.Serve()
-
 	// Run handlers
 	http.HandleFunc("/api/REST", transport.RestHandler)
 	http.HandleFunc("/api/gRPC", transport.GrpcHandler)
@@ -59,7 +41,7 @@ func main() {
 		)
 	}()
 
-	// Keep server goroutine alive until exit
+	// Keep the server alive until exit
 	runtime.Goexit()
 	fmt.Println("Exit")
 }

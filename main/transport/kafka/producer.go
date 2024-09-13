@@ -2,19 +2,21 @@ package producer
 
 import (
 	"context"
+	"errors"
 	"log"
 	"time"
 
 	"github.com/segmentio/kafka-go"
 )
 
-func Produce() {
+func Produce() error {
 	topic := "playground"
 	partition := 0
 
 	conn, err := kafka.DialLeader(context.Background(), "tcp", "localhost:9092", topic, partition)
 	if err != nil {
-		log.Fatal("failed to dial leader:", err)
+		log.Print(err)
+		return errors.New("couldn't connect to Kafka")
 	}
 
 	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
@@ -24,10 +26,14 @@ func Produce() {
 		kafka.Message{Value: []byte("Hello from vue-go-playground through Kafka! No. 3")},
 	)
 	if err != nil {
-		log.Fatal("failed to write messages:", err)
+		log.Print(err)
+		return errors.New("couldn't write messages to Kafka")
 	}
 
 	if err := conn.Close(); err != nil {
-		log.Fatal("failed to close writer:", err)
+		log.Print(err)
+		return errors.New("failed to close Kafka writer")
 	}
+
+	return nil
 }

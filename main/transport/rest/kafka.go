@@ -1,20 +1,20 @@
 package transport
 
 import (
+	"fmt"
 	"net/http"
+
+	producer "github.com/chnmk/vue-go-playground/main/transport/kafka"
 )
 
 func KafkaHandler(w http.ResponseWriter, r *http.Request) {
-	/*
-		var decoded vueMessage
+	fmt.Println("New request to Kafka")
 
-		err := json.NewDecoder(r.Body).Decode(&decoded)
+	err := producer.Produce()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		fmt.Printf("Got the following message: %s\n", decoded.Message)
-	*/
+	w.Write([]byte("Kafka request success"))
 }

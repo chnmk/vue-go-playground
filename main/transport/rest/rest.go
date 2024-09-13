@@ -12,9 +12,9 @@ type vueMessage struct {
 
 func RestHandler(w http.ResponseWriter, r *http.Request) {
 	var decoded vueMessage
+	fmt.Println("New request to REST")
 
 	err := json.NewDecoder(r.Body).Decode(&decoded)
-
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
