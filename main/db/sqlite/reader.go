@@ -3,24 +3,44 @@ package reader
 import (
 	"database/sql"
 	"fmt"
+	"os"
 )
 
-func ReadSQLite() {
-	db, err := sql.Open("sqlite3", "main/db/sqlite/test")
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+func Init() *sql.DB {
+	_, errNoDB := os.Stat("./main/db/sqlite/sqlite.db")
 
-	result, err := db.Exec("insert into test (mytext, myinteger) values ('Success', '42')",
-		"Apple", 72000)
+	db, err := sql.Open("sqlite", "./main/db/sqlite/sqlite.db")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
-	lastInsertId, _ := result.LastInsertId()
-	rowsAffecred, _ := result.RowsAffected()
+	if errNoDB == nil {
+		return db
+	}
 
-	fmt.Println("SQL last insert ID: ", lastInsertId)
-	fmt.Println("SQL rows affected: ", rowsAffecred)
+	_, err = db.Exec("CREATE TABLE test (id INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR(255));")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return db
+}
+
+func Read(db *sql.DB, str string) int64 {
+	result, err := db.Exec("insert into test (text) values (:s)", sql.Named("s", str))
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	lastInsertId, err := result.LastInsertId()
+	if err != nil {
+		fmt.Println(err)
+		return 0
+	}
+	// rowsAffecred, _ := result.RowsAffected()
+
+	fmt.Println("SQLite last insert ID: ", lastInsertId)
+	// fmt.Println("SQLite rows affected: ", rowsAffecred)
+
+	return lastInsertId
 }

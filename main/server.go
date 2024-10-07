@@ -7,10 +7,18 @@ import (
 	"net/http"
 	"runtime"
 
+	reader "github.com/chnmk/vue-go-playground/main/db/sqlite"
 	transport "github.com/chnmk/vue-go-playground/main/transport/rest"
+
+	_ "modernc.org/sqlite"
 )
 
 func main() {
+	// Initialize databases
+	sqlite := reader.Init()
+	defer sqlite.Close()
+	transport.SQLiteDB = sqlite
+
 	// Run handlers
 	http.HandleFunc("/api/REST", transport.RestHandler)
 	http.HandleFunc("/api/gRPC", transport.GrpcHandler)
